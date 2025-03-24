@@ -1,13 +1,19 @@
 // script.js
 
-// Get modal, button, and close button
+// Get modal, tile (trigger), and close button
 var modal = document.getElementById("myModal");
-var btn = document.getElementById("openModal");
+var triggerTile = document.getElementById("triggerTile");
 var closeBtn = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
+// When the user clicks the tile, flip it and open the modal
+triggerTile.onclick = function() {
+  // Flip the tile
+  triggerTile.classList.toggle("flip");
+
+  // Open the modal after the flip (delay for flip animation)
+  setTimeout(function() {
+    modal.style.display = "block";
+  }, 600);  // Wait for the flip animation to finish before opening the modal
 }
 
 // When the user clicks the close button, close the modal
