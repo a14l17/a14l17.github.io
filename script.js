@@ -68,18 +68,21 @@ function handleTerminalInput(e) {
 // --- COMMAND LOGIC ---
 function runCommand(cmd) {
   if (!cmd) return;
+
   let response = commands[cmd];
 
   if (typeof response === "function") {
-    response();
+    response(); // e.g., 'clear' command
   } else if (response) {
-    outputEl.innerHTML += `<div>${promptEl.textContent} ${cmd}</div><div>${response}</div>`;
+    outputEl.innerHTML += `<div>${response}</div>`;
   } else {
-    outputEl.innerHTML += `<div>${promptEl.textContent} ${cmd}</div><div>Command not found. Try 'help'.</div>`;
+    outputEl.innerHTML += `<div>Command not found. Try 'help'.</div>`;
   }
 
+  // Scroll to bottom
   outputEl.scrollTop = outputEl.scrollHeight;
 }
+
 
 // Attach only landing listener first
 document.addEventListener("keydown", handleLandingInput);
