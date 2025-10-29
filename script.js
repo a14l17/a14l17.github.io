@@ -48,7 +48,7 @@ function startTerminal(name) {
   stage = "terminal";
 
   // Set terminal prompt
-  promptEl.textContent = `${name}@portfolio:~$`;
+  promptEl.textContent = `annie@portfolio:~$`;
 
   // Welcome message
   outputEl.innerHTML = `
