@@ -104,3 +104,27 @@ function runCommand(cmd) {
 // INIT
 // -------------------
 document.addEventListener("keydown", handleLandingInput);
+
+const backBtn = document.getElementById("back-btn");
+
+backBtn.addEventListener("click", () => {
+  // Hide terminal, show landing
+  terminalEl.classList.add("hidden");
+  landingEl.classList.remove("hidden");
+
+  // Reset landing input
+  nameInput = "";
+  nameInputEl.textContent = "";
+
+  // Clear terminal output and input
+  outputEl.innerHTML = "";
+  userInput = "";
+  typedEl.textContent = "";
+
+  // Remove terminal listener
+  document.removeEventListener("keydown", handleTerminalInput);
+
+  // Restore landing listener
+  stage = "landing";
+  document.addEventListener("keydown", handleLandingInput);
+});

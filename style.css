@@ -50,3 +50,18 @@ body {
   0%, 50% { opacity: 1; }
   51%, 100% { opacity: 0; }
 }
+
+#back-btn {
+  background-color: #000;
+  color: #00ff7f;
+  border: 1px solid #00ff7f;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-family: 'Fira Code', monospace;
+}
+
+#back-btn:hover {
+  background-color: #00ff7f;
+  color: #000;
+}
