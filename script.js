@@ -1,3 +1,4 @@
+// Elements
 const nameInputEl = document.getElementById("name-input");
 const landingEl = document.getElementById("landing");
 const terminalEl = document.getElementById("terminal");
@@ -9,7 +10,7 @@ let nameInput = "";
 let userInput = "";
 let stage = "landing"; // 'landing' or 'terminal'
 
-// Commands for terminal
+// Terminal commands
 const commands = {
   help: "Available commands: about, projects, skills, resume, clear",
   about: "Hi, I’m a data enthusiast passionate about building and visualizing machine learning models.",
@@ -19,8 +20,12 @@ const commands = {
   clear: () => outputEl.innerHTML = ""
 };
 
-// --- LANDING INPUT HANDLER ---
+// -------------------
+// LANDING INPUT
+// -------------------
 function handleLandingInput(e) {
+  if (stage !== "landing") return;
+
   if (e.key.length === 1 && e.key !== " ") {
     nameInput += e.key;
     nameInputEl.textContent = nameInput;
@@ -28,30 +33,39 @@ function handleLandingInput(e) {
     nameInput = nameInput.slice(0, -1);
     nameInputEl.textContent = nameInput;
   } else if (e.key === "Enter" && nameInput.trim() !== "") {
-    // Remove landing listener so terminal doesn’t catch it
+    // --- FIX: Do NOT execute name as command ---
     document.removeEventListener("keydown", handleLandingInput);
     startTerminal(nameInput.trim());
   }
 }
 
-// --- SWITCH TO TERMINAL MODE ---
+// -------------------
+// START TERMINAL
+// -------------------
 function startTerminal(name) {
   landingEl.classList.add("hidden");
   terminalEl.classList.remove("hidden");
   stage = "terminal";
 
+  // Set terminal prompt
   promptEl.textContent = `${name}@portfolio:~$`;
+
+  // Welcome message
   outputEl.innerHTML = `
     <div>Welcome, <strong>${name}</strong>!</div>
     <div>Type 'help' to get started.</div>
   `;
 
-  // Now enable terminal input
+  // Enable terminal input
   document.addEventListener("keydown", handleTerminalInput);
 }
 
-// --- TERMINAL INPUT HANDLER ---
+// -------------------
+// TERMINAL INPUT
+// -------------------
 function handleTerminalInput(e) {
+  if (stage !== "terminal") return;
+
   if (e.key.length === 1 && e.key !== " ") {
     userInput += e.key;
     typedEl.textContent = userInput;
@@ -65,24 +79,28 @@ function handleTerminalInput(e) {
   }
 }
 
-// --- COMMAND LOGIC ---
+// -------------------
+// RUN COMMAND
+// -------------------
 function runCommand(cmd) {
   if (!cmd) return;
 
   let response = commands[cmd];
 
   if (typeof response === "function") {
-    response(); // e.g., 'clear' command
+    response(); // e.g., clear
   } else if (response) {
-    outputEl.innerHTML += `<div>${response}</div>`;
+    // Show the typed command above response (static)
+    outputEl.innerHTML += `<div><span style="color:#00ff7f">${promptEl.textContent}</span> ${cmd}</div><div>${response}</div>`;
   } else {
-    outputEl.innerHTML += `<div>Command not found. Try 'help'.</div>`;
+    outputEl.innerHTML += `<div><span style="color:#00ff7f">${promptEl.textContent}</span> ${cmd}</div><div>Command not found. Try 'help'.</div>`;
   }
 
   // Scroll to bottom
   outputEl.scrollTop = outputEl.scrollHeight;
 }
 
-
-// Attach only landing listener first
+// -------------------
+// INIT
+// -------------------
 document.addEventListener("keydown", handleLandingInput);
