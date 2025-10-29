@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alex | Terminal Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="terminal">
+  <!-- Landing screen -->
+  <div id="landing" class="centered">
+    <h1 class="title">~/portfolio</h1>
+    <p class="prompt">hello visitor, what is your name?</p>
+    <div class="input-line">
+      <span class="prompt">$ </span><span id="name-input"></span><span class="cursor">█</span>
+    </div>
+  </div>
+
+  <!-- Main terminal (hidden until name entered) -->
+  <div id="terminal" class="hidden">
     <div id="output"></div>
     <div id="input-line">
-      <span class="prompt">hello@visitor:~$</span>
+      <span class="prompt" id="terminal-prompt"></span>
       <span id="typed"></span><span class="cursor">█</span>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
