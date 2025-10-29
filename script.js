@@ -4,7 +4,7 @@ const typed = document.getElementById("typed");
 
 let commands = {
   help: "Available commands: about, projects, contact, clear",
-  about: "Hi! I’m Annie, a data engineer passionate about data security and building change for good.",
+  about: "Hello! I’m Annie, a data engineer passionate about data security and building change for good.",
   projects: "1. Bucketlist to be completed",
   contact: "Email: annieytlin@gmail.com | GitHub: a14l17",
   clear: () => output.innerHTML = ""
